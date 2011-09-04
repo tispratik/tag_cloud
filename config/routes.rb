@@ -1,5 +1,6 @@
 TagCloud::Application.routes.draw do
 
+  root :to => "tags#show"
   match 'tags/show' => "tags#show"
 
   # The priority is based upon order of creation:
