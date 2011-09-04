@@ -1,0 +1,52 @@
+#container
+  = form_tag 'show', :method => :post do
+
+    %table
+      %tr
+        %td
+          = text_area_tag :the_text, nil,{ :rows => 15, :cols => 80 }
+        %td{:rowspan => 2}
+          #result
+            -@text_hash.each do |t,v|
+              %font{:size => "#{v}"}
+                = t
+
+      %tr
+        %td
+          %table{:width => '100%'}
+            %tr
+              %td{:colspan => 2}
+                %font{:size => 4} Options:
+            %tr
+              %td
+                Maximum number of words to show?
+                .sm 25 - 100 is a good range
+              %td
+                = text_field_tag :max_words, nil, :size => 2
+            %tr
+              %td
+                Minumum frequency?
+                .sm Dont show infrequent words
+              %td
+                = text_field_tag :min_freq, nil, :size => 2
+            %tr
+              %td
+                Show frequencies?
+                .sm Show word count next to each word
+              %td
+                Yes
+                = radio_button_tag :show_freq, "Yes", true
+                No
+                = radio_button_tag :show_freq, "No", false
+            %tr
+              %td
+                Group similar words?
+                .sm eg: learned, learns, learning
+              %td
+                Yes
+                = radio_button_tag :group_similar, "Yes", true
+                No
+                = radio_button_tag :group_similar, "No", false
+            %tr
+              %td{:colspan => 2}
+                = submit_tag "Visualize!"
